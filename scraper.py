@@ -18,11 +18,26 @@ cards = driver.find_elements(By.CSS_SELECTOR, "div[class='col-xs-2-4 shopee-sear
 
 items = []
 for card in cards:
-    actionchains(driver).move_to_element(card).perform()
+    #actionchains(driver).move_to_element(card).perform()
+
     title = card.find_element(By.CSS_SELECTOR, "div[class='_1yN94N WoKSjC _2KkMCe']").text
     price = card.find_element(By.CSS_SELECTOR, "div[class='cbl0HO MUmBjS']").text
     link = card.find_element(By.TAG_NAME, "a").get_attribute('href')
     items.append((title,price,link))
 
-print(items)
+#print(items)
+
+result=[]
+for item in items:
+    driver.get(item[2])
+
+    for i in range(5):
+        driver.execute_script("window.scrollTo(0, document.body.scrollheight)")
+        time.sleep(3)
+    
+    comments = driver.find_elements(By.CSS_SELECTOR, "div[class ='']")
+    for comment in comments:
+        result.append((item[0], item[1], comment.text))
+    
+    
 
