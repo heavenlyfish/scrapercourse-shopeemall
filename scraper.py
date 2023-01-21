@@ -18,6 +18,7 @@ cards = driver.find_elements(By.CSS_SELECTOR, "div[class='col-xs-2-4 shopee-sear
 
 items = []
 for card in cards:
+    actionchains(driver).move_to_element(card).perform()
     title = card.find_element(By.CSS_SELECTOR, "div[class='_1yN94N WoKSjC _2KkMCe']").text
     price = card.find_element(By.CSS_SELECTOR, "div[class='cbl0HO MUmBjS']").text
     link = card.find_element(By.TAG_NAME, "a").get_attribute('href')
